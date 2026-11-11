@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Mail, Phone, MapPin, Send, Check, Copy, ExternalLink, Linkedin, Github } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Check, Copy, ExternalLink, Linkedin, Github, Cpu } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { PROFILE } from '../data/portfolioData';
 
@@ -9,7 +9,7 @@ export const ContactSection: React.FC = () => {
   const [formState, setFormState] = useState({
     name: '',
     email: '',
-    topic: 'Full-time Engineering Role',
+    topic: 'Full-time AI Engineer Role',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -46,14 +46,15 @@ export const ContactSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header */}
         <div className="space-y-2">
-          <div className="text-xs font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-semibold">
-            Let&apos;s Connect
+          <div className="text-xs font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-semibold flex items-center gap-1.5">
+            <Cpu className="w-3.5 h-3.5" />
+            <span>Connect & Collaborate</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
             Get in Touch
           </h2>
           <p className="text-sm text-slate-500 dark:text-slate-400 max-w-xl">
-            Currently interviewing for Senior Frontend, Machine Learning, and Full-Stack Engineering roles. Open to technical collaborations and ambitious projects.
+            Currently interviewing for <strong className="text-slate-900 dark:text-slate-100">AI Engineer</strong> positions across GenAI, RAG systems, and distributed ML pipelines. Open to high-impact technical collaborations.
           </p>
         </div>
 
@@ -61,7 +62,13 @@ export const ContactSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column: Direct Contact Info */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="p-6 bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-2xl space-y-5">
+            <motion.div
+              initial={{ opacity: 0, x: -15 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="p-6 bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-2xl space-y-5 shadow-sm"
+            >
               <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">
                 Direct Channels
               </h3>
@@ -81,13 +88,15 @@ export const ContactSection: React.FC = () => {
                       </a>
                     </div>
                   </div>
-                  <button
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                     onClick={handleCopyEmail}
-                    className="p-2 text-slate-500 hover:text-slate-900 dark:hover:text-white rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors shrink-0"
+                    className="p-2 text-slate-500 hover:text-slate-900 dark:hover:text-white rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors shrink-0 cursor-pointer"
                     title="Copy Email"
                   >
                     {copiedEmail ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
-                  </button>
+                  </motion.button>
                 </div>
 
                 {/* Phone */}
@@ -118,7 +127,9 @@ export const ContactSection: React.FC = () => {
 
               {/* Social links */}
               <div className="pt-2 flex items-center gap-3">
-                <a
+                <motion.a
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   href={PROFILE.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -126,8 +137,10 @@ export const ContactSection: React.FC = () => {
                 >
                   <Linkedin className="w-4 h-4 text-indigo-500" />
                   <span>LinkedIn Profile</span>
-                </a>
-                <a
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   href={PROFILE.github}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -135,16 +148,22 @@ export const ContactSection: React.FC = () => {
                 >
                   <Github className="w-4 h-4" />
                   <span>GitHub Profile</span>
-                </a>
+                </motion.a>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Right Column: Interactive Message Form */}
           <div className="lg:col-span-7">
-            <div className="p-6 sm:p-8 bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-2xl space-y-6">
+            <motion.div
+              initial={{ opacity: 0, x: 15 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="p-6 sm:p-8 bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-2xl space-y-6 shadow-sm"
+            >
               <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">
-                Send a Direct Dispatch
+                Send an Inquiry to Satyajit
               </h3>
 
               {submitted ? (
@@ -161,9 +180,9 @@ export const ContactSection: React.FC = () => {
                   <button
                     onClick={() => {
                       setSubmitted(false);
-                      setFormState({ name: '', email: '', topic: 'Full-time Engineering Role', message: '' });
+                      setFormState({ name: '', email: '', topic: 'Full-time AI Engineer Role', message: '' });
                     }}
-                    className="mt-2 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline"
+                    className="mt-2 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline cursor-pointer"
                   >
                     Send Another Message
                   </button>
@@ -180,7 +199,7 @@ export const ContactSection: React.FC = () => {
                         required
                         value={formState.name}
                         onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                        placeholder="e.g. Elena Rostova"
+                        placeholder="e.g. Sarah Connor"
                         className="w-full px-3.5 py-2.5 text-xs bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-indigo-500"
                       />
                     </div>
@@ -193,7 +212,7 @@ export const ContactSection: React.FC = () => {
                         required
                         value={formState.email}
                         onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                        placeholder="e.g. elena@company.com"
+                        placeholder="e.g. sarah@company.com"
                         className="w-full px-3.5 py-2.5 text-xs bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-indigo-500"
                       />
                     </div>
@@ -208,9 +227,9 @@ export const ContactSection: React.FC = () => {
                       onChange={(e) => setFormState({ ...formState, topic: e.target.value })}
                       className="w-full px-3.5 py-2.5 text-xs bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-indigo-500"
                     >
-                      <option value="Full-time Engineering Role">Full-time Engineering Role (Frontend / AI)</option>
-                      <option value="Contract / Architectural Consulting">Contract / Architectural Consulting</option>
-                      <option value="Open Source Collaboration">Open Source AI Collaboration</option>
+                      <option value="Full-time AI Engineer Role">Full-time AI Engineer Role (GenAI / ML)</option>
+                      <option value="Contract AI Architecture Consulting">Contract AI Architecture Consulting</option>
+                      <option value="Open Source AI Collaboration">Open Source AI Collaboration</option>
                       <option value="General Technical Inquiry">General Technical Inquiry</option>
                     </select>
                   </div>
@@ -224,7 +243,7 @@ export const ContactSection: React.FC = () => {
                       rows={4}
                       value={formState.message}
                       onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                      placeholder="Share details about the role, technical challenge, or project scope..."
+                      placeholder="Share details about the AI role, technical challenge, or project scope..."
                       className="w-full px-3.5 py-2.5 text-xs bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-indigo-500 resize-none"
                     />
                   </div>
@@ -237,18 +256,20 @@ export const ContactSection: React.FC = () => {
                       Or open default email client
                     </a>
 
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
                       type="submit"
                       disabled={isSubmitting}
                       className="inline-flex items-center gap-2 px-6 py-2.5 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 rounded-lg shadow-sm transition-all cursor-pointer"
                     >
                       <Send className="w-3.5 h-3.5" />
                       <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
-                    </button>
+                    </motion.button>
                   </div>
                 </form>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

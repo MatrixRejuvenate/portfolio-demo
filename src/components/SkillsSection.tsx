@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
-import { Search, Sparkles, CheckCircle2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Search, Sparkles, CheckCircle2, Cpu } from 'lucide-react';
 import { SKILL_CATEGORIES } from '../data/portfolioData';
 
 export const SkillsSection: React.FC = () => {
@@ -28,14 +28,15 @@ export const SkillsSection: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-2">
-            <div className="text-xs font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-semibold">
-              Technical Capabilities
+            <div className="text-xs font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-semibold flex items-center gap-1.5">
+              <Cpu className="w-3.5 h-3.5" />
+              <span>Technical Competencies</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-              Skills & Engineering Stack
+              AI & Engineering Stack
             </h2>
             <p className="text-sm text-slate-500 dark:text-slate-400 max-w-xl">
-              Proven proficiency spanning deep learning algorithms, reactive frontend engineering, distributed streaming, and cloud tooling.
+              Specialized proficiencies across deep neural networks, GenAI & RAG systems, distributed Kafka-Spark streaming pipelines, and modern reactive frontends.
             </p>
           </div>
 
@@ -46,8 +47,8 @@ export const SkillsSection: React.FC = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search skill (e.g. Vue 3, PyTorch)..."
-              className="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-indigo-500"
+              placeholder="Search skill (e.g. PyTorch, FAISS, Kafka)..."
+              className="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-indigo-500 transition-colors"
             />
           </div>
         </div>
@@ -56,17 +57,19 @@ export const SkillsSection: React.FC = () => {
         {!searchQuery.trim() && (
           <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3">
             {SKILL_CATEGORIES.map((cat) => (
-              <button
+              <motion.button
                 key={cat.id}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedCatId(cat.id)}
-                className={`px-4 py-2 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
+                className={`px-4 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
                   selectedCatId === cat.id
                     ? 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 shadow-sm'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-900'
                 }`}
               >
                 {cat.name}
-              </button>
+              </motion.button>
             ))}
           </div>
         )}
@@ -79,34 +82,39 @@ export const SkillsSection: React.FC = () => {
         )}
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayedSkills.map((skill, index) => (
-            <motion.div
-              key={skill.name + index}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.04 }}
-              className="p-5 bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-indigo-500/40 transition-colors space-y-2.5"
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-semibold text-slate-900 dark:text-slate-100 text-sm">
-                  {skill.name}
-                </span>
-                <span className="text-xs font-mono text-indigo-600 dark:text-indigo-400">
-                  {skill.level}
-                </span>
-              </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                {skill.details}
-              </p>
-              {'categoryName' in skill && (
-                <div className="pt-2 text-[11px] text-slate-400 font-mono">
-                  {String(skill.categoryName)}
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <AnimatePresence>
+            {displayedSkills.map((skill, index) => (
+              <motion.div
+                key={skill.name + index}
+                layout
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3, delay: index * 0.03 }}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className="p-5 bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-indigo-500/50 hover:shadow-lg transition-all space-y-2.5 group cursor-default"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-semibold text-slate-900 dark:text-slate-100 text-sm group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                    {skill.name}
+                  </span>
+                  <span className="text-xs font-mono text-indigo-600 dark:text-indigo-400">
+                    {skill.level}
+                  </span>
                 </div>
-              )}
-            </motion.div>
-          ))}
-        </div>
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                  {skill.details}
+                </p>
+                {'categoryName' in skill && (
+                  <div className="pt-2 text-[11px] text-slate-400 font-mono">
+                    {String(skill.categoryName)}
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );

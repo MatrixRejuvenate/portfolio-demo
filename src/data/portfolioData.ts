@@ -1,3 +1,8 @@
+import avatarImg from '../assets/images/avatar_satyajit_1794371394609.jpg';
+import ragImg from '../assets/images/project_rag_system_1794371395446.jpg';
+import kafkaImg from '../assets/images/project_kafka_stream_1794371396655.jpg';
+import visionImg from '../assets/images/project_vision_ai_1794371397217.jpg';
+
 export interface Project {
   id: string;
   title: string;
@@ -45,19 +50,23 @@ export interface AchievementItem {
   highlight?: string;
 }
 
+// Support GitHub Pages subpath deployment automatically
+const BASE = import.meta.env.BASE_URL || './';
+const cleanBase = BASE.endsWith('/') ? BASE : `${BASE}/`;
+
 export const PROFILE = {
   name: "Satyajit Mohapatra",
-  role: "Senior Frontend & ML/AI Engineer",
-  tagline: "Bridging Reactive Frontend Architectures with High-Throughput ML & Real-Time Data Pipelines",
+  role: "AI Engineer",
+  tagline: "Architecting Generative AI Systems, Neural RAG Pipelines, and Scalable ML Architectures",
   email: "satyajitmohapatra.work@gmail.com",
   phone: "+91 8260683057",
   location: "Bhubaneswar / Sambalpur, India",
   linkedin: "https://www.linkedin.com/in/satyajit-mohapatra2843/",
   github: "https://github.com/MatrixRejuvenate",
-  resumePdfUrl: "/assets/aistudio/resume_Satyajit_dfn_v3__1__51403d68.pdf",
-  avatarUrl: "/src/assets/images/avatar_satyajit_1794371394609.jpg",
+  resumePdfUrl: `${cleanBase}assets/aistudio/resume_Satyajit_dfn_v3__1__51403d68.pdf`,
+  avatarUrl: avatarImg,
   summary:
-    "2026 Computer Science Engineering graduate with strong foundations in Vue 3 / modern reactive frontend development, machine learning, and data engineering. Experienced in developing end-to-end data-driven solutions and ML systems, with a structured, analytical approach to problem-solving.",
+    "2026 Computer Science Engineering graduate with deep specialization as an AI Engineer. Experienced in building production-ready GenAI applications, high-performance RAG pipelines, distributed streaming analytics, and transfer-learning vision models with a structured, analytical engineering approach.",
   spokenLanguages: [
     { language: "English", proficiency: "Fluent" },
     { language: "Hindi", proficiency: "Fluent" },
@@ -65,16 +74,16 @@ export const PROFILE = {
     { language: "Bengali", proficiency: "Fluent" },
   ],
   interests: [
-    "Agentic AI & Orchestration",
-    "Cloud Architecture & Security",
+    "Agentic AI & LLM Orchestration",
+    "Cloud Computing & AI Security",
     "Real-time Distributed Streaming",
-    "Component-Driven UI Engineering",
+    "Deep Learning & Computer Vision",
   ],
   stats: [
-    { label: "RAG Test Accuracy", value: "90%" },
-    { label: "Industrial Packaging Gain", value: "+94%" },
+    { label: "RAG Retrieval Accuracy", value: "90%" },
+    { label: "Industrial AI Sorting Gain", value: "+94%" },
     { label: "GATE CS/IT 2025", value: "92%ile" },
-    { label: "TCS iON Python Test", value: "100%" },
+    { label: "TCS iON Python Assessment", value: "100%" },
   ],
 };
 
@@ -85,7 +94,7 @@ export const PROJECTS: Project[] = [
     subtitle: "High-Performance Retrieval-Augmented Generation Engine",
     category: "ai",
     categoryLabel: "GenAI & NLP",
-    image: "/src/assets/images/project_rag_system_1794371395446.jpg",
+    image: ragImg,
     summary:
       "Engineered an enterprise-grade QA chatbot using LangChain, Hugging Face transformers, and FAISS vector indexing. Implemented in-memory caching of embeddings to cut semantic search latency by 72% while maintaining high accuracy.",
     impact: "Achieved 90% test accuracy on multi-turn domain queries with sub-100ms vector lookups.",
@@ -113,7 +122,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Distributed Kafka-Spark Streaming & NLP Analytics",
     category: "streaming",
     categoryLabel: "Data Engineering & Streaming",
-    image: "/src/assets/images/project_kafka_stream_1794371396655.jpg",
+    image: kafkaImg,
     summary:
       "Automated real-time data scraping from Reddit subreddits, coupled with sentiment classification and keyword extraction. Built an Apache Kafka to PySpark streaming pipeline with tumbling window aggregation, storing metrics into PostgreSQL and serving interactive analytics.",
     impact: "Handled continuous Reddit message streams with sub-second sliding window sentiment aggregation.",
@@ -141,7 +150,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Industrial Deep Learning Computer Vision for Packaging",
     category: "vision",
     categoryLabel: "Computer Vision & Deep Learning",
-    image: "/src/assets/images/project_vision_ai_1794371397217.jpg",
+    image: visionImg,
     summary:
       "Developed a custom CNN-based image classification framework for oil seeds and nuts to power automated industrial sorting and cleaning conveyor lines. Built a custom regional agricultural dataset and benchmarked fine-tuned vision backbones.",
     impact: "Boosted industrial packaging efficiency and purity screening throughput by 94%.",
@@ -169,7 +178,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Full-Stack Medical Administration Suite & REST API",
     category: "web",
     categoryLabel: "Web & API Systems",
-    image: "/src/assets/images/project_rag_system_1794371395446.jpg",
+    image: ragImg,
     summary:
       "Architected a comprehensive Flask web application to streamline outpatient clinic operations, doctor appointment schedules, electronic health records, and prescription tracking with role-based authentication.",
     impact: "Unified patient admission, doctor scheduling, and medical records into a clean reactive interface.",
@@ -208,19 +217,6 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     ],
   },
   {
-    id: "frontend-ui",
-    name: "Frontend & Reactive UI",
-    description: "Modern component-driven development with Vue 3, React, Tailwind CSS, and fluid motion.",
-    skills: [
-      { name: "Vue 3", level: "Advanced", details: "Composition API (<script setup>), reactive refs, computed, Pinia" },
-      { name: "Tailwind CSS", level: "Expert", details: "Modern utility-first styling, v4 design tokens, responsive layouts" },
-      { name: "Framer Motion", level: "Advanced", details: "Spring physics, layout transitions, scroll triggers, gesture controls" },
-      { name: "Locomotive Scroll", level: "Advanced", details: "Smooth inertia scrolling, parallax data attributes, viewport triggers" },
-      { name: "HTML5 / Modern CSS", level: "Expert", details: "Semantic structure, responsive viewport math, accessibility" },
-      { name: "JavaScript / TypeScript", level: "Advanced", details: "ESNext, strong typing, async architecture, DOM manipulation" },
-    ],
-  },
-  {
     id: "data-analytics",
     name: "Data Science & Analytics",
     description: "Exploratory data analysis, statistical modeling, and high-impact visual dashboards.",
@@ -234,8 +230,8 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
   },
   {
     id: "streaming-backend",
-    name: "Data Eng & Backend",
-    description: "Real-time streaming pipelines, message queues, and robust REST APIs.",
+    name: "Data Eng & AI Backend",
+    description: "Real-time streaming pipelines, message queues, and robust AI inference APIs.",
     skills: [
       { name: "Apache Kafka", level: "Advanced", details: "Distributed topic partitioning, consumer groups, stream buffering" },
       { name: "PySpark & Hadoop", level: "Proficient", details: "Structured streaming, map-reduce fundamentals, windowing" },
@@ -243,6 +239,19 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
       { name: "Flask & REST APIs", level: "Advanced", details: "Blueprint architecture, JWT/session auth, schema validation" },
       { name: "PostgreSQL & SQLite", level: "Advanced", details: "Relational modeling, indexing, query optimization, ACID transactions" },
       { name: "SQL", level: "Advanced", details: "Complex joins, analytical window functions, subqueries" },
+    ],
+  },
+  {
+    id: "frontend-ui",
+    name: "Frontend & AI Interfaces",
+    description: "High-performance reactive interfaces with Vue 3, React, Tailwind CSS, and fluid motion for AI tooling.",
+    skills: [
+      { name: "Vue 3", level: "Advanced", details: "Composition API (<script setup>), reactive refs, computed, Pinia" },
+      { name: "Tailwind CSS", level: "Expert", details: "Modern utility-first styling, v4 design tokens, responsive layouts" },
+      { name: "Framer Motion", level: "Advanced", details: "Spring physics, layout transitions, scroll triggers, gesture controls" },
+      { name: "Locomotive Scroll", level: "Advanced", details: "Smooth inertia scrolling, parallax data attributes, viewport triggers" },
+      { name: "HTML5 / Modern CSS", level: "Expert", details: "Semantic structure, responsive viewport math, accessibility" },
+      { name: "JavaScript / TypeScript", level: "Advanced", details: "ESNext, strong typing, async architecture, DOM manipulation" },
     ],
   },
   {
@@ -268,8 +277,8 @@ export const EDUCATION_DATA: EducationItem[] = [
     score: "CGPA: 8.628 / 10",
     badge: "Undergraduate Degree",
     coursework: [
-      "Database Management Systems (DBMS)",
       "Machine Learning",
+      "Database Management Systems (DBMS)",
       "Operating Systems",
       "Data Mining",
       "Computer Networks",
@@ -283,9 +292,9 @@ export const EDUCATION_DATA: EducationItem[] = [
     score: "CGPA: 8.6 / 10",
     badge: "Prestigious Institute Program",
     coursework: [
+      "Deep Learning",
       "Machine Learning Techniques",
       "Mathematical Statistics",
-      "Deep Learning",
       "Data Structures and Algorithms",
     ],
   },
@@ -352,7 +361,7 @@ export const VUE3_DEMO_CODE = `<script setup lang="ts">
 import { ref, computed, watchEffect } from 'vue'
 
 // Reactive state for RAG Search Query
-const searchQuery = ref('What is the embedding vector dimension?')
+const searchQuery = ref('What is the embedding vector dimension in FAISS?')
 const isSearching = ref(false)
 const searchLatency = ref(42)
 const confidenceScore = ref(0.94)

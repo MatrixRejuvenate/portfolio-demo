@@ -13,7 +13,7 @@ import { ResumeModal } from './components/ResumeModal';
 
 export default function App() {
   const { isDark, toggleTheme } = useTheme();
-  const { containerRef, scrollToSection } = useLocomotiveScroll(true);
+  const { containerRef, scrollProgress, scrollToSection } = useLocomotiveScroll(true);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   return (
@@ -25,6 +25,7 @@ export default function App() {
       {/* Top Bar Navigation */}
       <Navbar
         isDark={isDark}
+        scrollProgress={scrollProgress}
         onToggleTheme={toggleTheme}
         onOpenResume={() => setIsResumeOpen(true)}
         onNavigate={scrollToSection}
