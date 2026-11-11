@@ -4,10 +4,15 @@
     <meta charset="utf-8">
     <title>Satyajit Mohapatra — AI Engineer</title>
     <script>
-      // Single Page App redirect for GitHub Pages
-      sessionStorage.redirect = location.href;
+      // Single Page Application redirect for GitHub Pages project sites
+      var segments = location.pathname.split('/').filter(Boolean);
+      if (segments.length > 0) {
+        // Redirect back to the project root directory /<repo>/
+        location.replace('/' + segments[0] + '/');
+      } else {
+        location.replace('/');
+      }
     </script>
-    <meta http-equiv="refresh" content="0;URL='./'">
   </head>
   <body>
   </body>

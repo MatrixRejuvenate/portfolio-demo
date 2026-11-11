@@ -9,7 +9,7 @@ export function useLocomotiveScroll(enabled: boolean = true) {
     if (!enabled || typeof window === 'undefined') return;
 
     // Check prefers-reduced-motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
     if (prefersReducedMotion) return;
 
     let isMounted = true;
@@ -17,21 +17,26 @@ export function useLocomotiveScroll(enabled: boolean = true) {
     async function initScroll() {
       try {
         const LocomotiveScrollModule = await import('locomotive-scroll');
-        const LocomotiveScroll = LocomotiveScrollModule.default;
+        const LocomotiveScroll = LocomotiveScrollModule?.default || LocomotiveScrollModule;
 
-        if (!isMounted) return;
+        if (!isMounted || !LocomotiveScroll) return;
 
-        scrollRef.current = new LocomotiveScroll({
-          lenisOptions: {
-            wrapper: window,
-            content: document.documentElement,
-            lerp: 0.08,
-            duration: 1.2,
-            smoothWheel: true,
-          },
-        });
+        // Locomotive Scroll v5 uses Lenis under the hood.
+        // We do not pass wrapper: window or content: document.documentElement
+        // as window does not have getBoundingClientRect and can crash Lenis.
+        try {
+          scrollRef.current = new LocomotiveScroll({
+            lenisOptions: {
+              lerp: 0.1,
+              duration: 1.2,
+              smoothWheel: true,
+            },
+          });
+        } catch (initErr) {
+          console.warn('LocomotiveScroll constructor failed, falling back to native smooth scrolling:', initErr);
+        }
 
-        // Add scroll listener
+        // Add scroll listener for progress indicator
         const handleScroll = () => {
           const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
           if (totalHeight > 0) {

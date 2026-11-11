@@ -3,6 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Ensure trailing slash on GitHub Pages directory URLs so relative paths './assets/...' resolve accurately
+      if (location.pathname && !location.pathname.endsWith('/') && !location.pathname.split('/').pop().includes('.')) {
+        location.replace(location.pathname + '/' + location.search + location.hash);
+      }
+    </script>
     <title>Satyajit Mohapatra — AI Engineer Portfolio</title>
     <meta name="description" content="Portfolio of Satyajit Mohapatra, an AI Engineer specializing in GenAI, RAG architectures, machine learning pipelines, and high-performance neural models." />
     <meta property="og:title" content="Satyajit Mohapatra — AI Engineer Portfolio" />
